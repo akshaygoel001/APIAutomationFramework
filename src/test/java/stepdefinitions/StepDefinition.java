@@ -23,7 +23,6 @@ public class StepDefinition extends Utils{
 	
 	@Given("Add Place Payload with {string} , {string} and {string}")
 	public void add_place_payload_with_and(String name, String language, String address) {
-		System.out.println("add_place_payload_with_and");
 		data=new TestDataBuild();
 		req=given()
 			.spec(requestSpecBuilder())
@@ -32,7 +31,6 @@ public class StepDefinition extends Utils{
 
 	@When("User calls {string} with HTTP {string} request")
 	public void user_calls_place_api_with_http_request(String resource,String httpMehtod) {
-		System.out.println("user_calls_place_api_with_http_request");
 		System.out.println(APIResources.valueOf(resource).getResource());
 		if(httpMehtod.equalsIgnoreCase("POST")) {
 			resp=req.when()
@@ -54,18 +52,15 @@ public class StepDefinition extends Utils{
 
 	@Then("API call got success with status code {int}")
 	public void api_call_got_success_with_status_code(Integer int1) {
-	    System.out.println("api_call_got_success_with_status_code");
 		assertEquals(resp.getStatusCode(), 200);
 	}
 
 	@Then("{string} in response body is {string}")
 	public void in_response_body_is(String key, String value) {
-	    System.out.println("in_response_body_is");
 	    assertEquals(getJsonPath(resp,key), value);
 	}
 	@Then("verify place_id created maps to {string} using {string}")
 	public void verify_place_id_created_maps_to_using(String expectedName, String resource) {
-		System.out.println("verify_place_id_created_maps_to_using");
 		placeId=getJsonPath(resp,"place_id");
 		req=given()
 		.spec(requestSpecBuilder())
@@ -76,8 +71,6 @@ public class StepDefinition extends Utils{
 	}
 	@Given("Delete Place Payload with place_id")
 	public void delete_place_payload_with_place_id() {
-		System.out.println("delete_place_payload_with_place_id");
-		System.out.println(placeId);
 		data=new TestDataBuild();
 		req=given()
 			.spec(requestSpecBuilder())
